@@ -1,4 +1,4 @@
-Python vs. PHP
+The snake and the elephant
 =============
 
 I had heard a lot about how Python is better than PHP. Even if we discard personal preferences re: syntax and readability, the Python crowd touts its performance. I decided to run a simple test.
