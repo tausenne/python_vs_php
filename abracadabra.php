@@ -1,12 +1,19 @@
 <?php
+global $argv;
 $start = microtime(true);
-$contents = explode(PHP_EOL, file_get_contents('input.txt'));
-array_pop($contents); // remove the last (empty) element of the resulting array
-$count_found = 0;
-echo 'There are a total of ' . number_format(count($contents)) . ' lines to evaluate' . PHP_EOL;
-foreach ($contents as $line) {
-    if (strpos($line, 'abracadabra') !== false) {
-        ++$count_found;
+
+$top_cap = (isset($argv[1]) && !empty($argv[1])) ? $argv[1] : 100;
+echo "Running the searcher over {$top_cap} iterations" . PHP_EOL;
+
+foreach (range(0, $top_cap) as $cycle) {
+    $contents = explode(PHP_EOL, file_get_contents('input.txt'));
+    array_pop($contents); // remove the last (empty) element of the resulting array
+    $count_found = $total_lines = 0;
+    foreach ($contents as $line) {
+        ++$total_lines;
+        if (strpos($line, 'abracadabra') !== false) {
+            ++$count_found;
+        }
     }
 }
 
@@ -29,6 +36,8 @@ switch ($count_found) {
 
         echo "There {$verb} {$count_found} {$quote} in the file" . PHP_EOL;
 }
+
+echo "There were a total of {$total_lines} lines to evaluate" . PHP_EOL;
 
 $end = microtime(true);
 $diff = $end - $start;
