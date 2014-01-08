@@ -8,24 +8,22 @@ print 'Running the searcher over ' + str(top_cap) + ' iterations'
 
 for cycle in range(0, top_cap):
     count_found = total_lines = 0
-    fs = open('input.txt', 'r')
-    for line in fs:
-        total_lines += 1
-        if line.find('abracadabra') > -1:
-            count_found += 1 # there're no ++ and -- operators in python
-    fs.close()
+    with open('input.txt', 'r') as fs:
+        for line in fs:
+            total_lines += 1
+            if line.find('abracadabra') > -1:
+                count_found += 1 # there're no ++ and -- operators in python
 
+plural = ''
 if count_found == 0:
-    print 'There was no abracadabra in the file'
+    verb = 'was no'
+elif count_found == 1:
+    verb = 'was a total of 1'
 else:
-    if count_found == 1:
-        verb = 'was'
-        quote = 'abracadabra'
-    else:
-        verb = 'were'
-        quote = 'abracadabras'
+    verb = 'were a total of ' + str(count_found)
+    plural = 's'
 
-print 'There ' + verb + ' ' + str(count_found) + ' ' + quote + ' in the file'
+print 'There ' + verb + ' abracadabra' + plural + ' in the file'
 
 print 'There were a total of ' + str(total_lines) + ' lines to evaluate'
 
